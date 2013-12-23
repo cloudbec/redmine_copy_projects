@@ -5,7 +5,7 @@
 
     <fieldset class="box tabular"><legend><%= l(:button_copy) %></legend>
       <p>
-        <label><%= l(:label_all_tasks_author) %></label><%= select_tag :issues_author, options_for_select([["<< #{l(:label_me)} >>", User.current.id]] + @source_project.members.map{ |x| [x.name, x.id]}) %>
+        <label><%= l(:label_all_tasks_author) %></label><%= select_tag :issues_author, options_for_select([["<< #{l(:label_me)} >>", User.current.id]] + @source_project.members.map{ |x| [x.name, x.user_id]}) %>
       </p>
       <p>
         <label><%= l(:label_all_tasks_date) %></label><%= text_field_tag :issues_date, Time.zone.now.strftime('%Y-%m-%d') %><%= calendar_for('issues_task') %>
