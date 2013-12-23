@@ -35,13 +35,13 @@ module RedmineCopyProjects
               end
               @project.set_allowed_parent!(params[:project]['parent_id']) if params[:project].has_key?('parent_id')
               flash[:notice] = l(:notice_successful_create)
-              redirect_to settings_project_path(@project)
+              redirect_to project_path(@project)
             elsif !@project.new_record?
               # Project was created
               # But some objects were not copied due to validation failures
               # (eg. issues from disabled trackers)
               # TODO: inform about that
-              redirect_to settings_project_path(@project)
+              redirect_to project_path(@project)
             end
           end
         end
