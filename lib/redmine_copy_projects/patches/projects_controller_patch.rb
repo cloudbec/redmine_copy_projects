@@ -16,6 +16,7 @@ module RedmineCopyProjects
 
     module InstanceMethods
       def copy_with_copy_projects
+        Rails.logger.info "--------------- Using patched version of copy routine"
         @issue_custom_fields = IssueCustomField.sorted.all
         @trackers = Tracker.sorted.all
         @source_project = Project.find(params[:id])
@@ -30,7 +31,11 @@ module RedmineCopyProjects
               if params[:issues_author] && params[:issues_date]
                 author = User.find(params[:issues_author])
                 @project.issues.each do |issue|
-                  issue.update_attributes(author: author, created_on: params[:issues_date])
+                  Rails.logger.info "Updating for task #{issue}"
+                  issue.assign_attributes(author: author, created_on: params[:issues_date])
+                  issue.save(validate: false)
+                  issue.reload
+                  Rails.logger.info "Task #{issue} - #{issue.author} #{issue.created_on}"
                 end
               end
               @project.set_allowed_parent!(params[:project]['parent_id']) if params[:project].has_key?('parent_id')
