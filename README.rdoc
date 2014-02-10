@@ -1,11 +1,13 @@
-= Redmine copy project delegation
+= Redmine copy project delegator
 
-This plugin enable the delegation of the right to copy a project to various role.
+This plugin enable the delegation of the right to copy a project to various role and multiply the project by any number.
 
 
 While doing this it can also
 
 
-Change the author of the issues
-Change the date of the issues
+- Change the author of the issues
+- Change the date of the issues
+
+
 
